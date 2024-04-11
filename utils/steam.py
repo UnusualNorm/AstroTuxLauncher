@@ -2,6 +2,7 @@
     Module containing utility methods to interact with, download from and update using Steam
 """
 
+import platform
 import tempfile
 from urllib import request
 from os import path
@@ -15,7 +16,11 @@ from utils.interface import run_proc_with_logging, safeformat, AP_SPINNER, AP_BA
 from alive_progress import alive_bar
 from utils.misc import CONTROL_CODES_SUPPORTED
 
-DEPOTDL_LATEST_ZIP_URL="https://github.com/SteamRE/DepotDownloader/releases/latest/download/DepotDownloader-linux-x64.zip"
+DEPOTDL_LATEST_ZIP_ARCH="x64"
+if platform.machine() == "aarch64":
+    DEPOTDL_LATEST_ZIP_ARCH="arm64"
+
+DEPOTDL_LATEST_ZIP_URL=f"https://github.com/SteamRE/DepotDownloader/releases/latest/download/DepotDownloader-linux-{DEPOTDL_LATEST_ZIP_ARCH}.zip"
 
 LOGGER = logging.getLogger("Steam")
 

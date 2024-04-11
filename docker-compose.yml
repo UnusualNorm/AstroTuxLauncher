@@ -1,0 +1,9 @@
+services:
+  astroserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.amd64
+    # image: ghcr.io/joejoetv/astrotuxlauncher:master
+    volumes:
+      - ./AstroneerServer:/app/AstroneerServer
+      - ./.wine:/root/.wine

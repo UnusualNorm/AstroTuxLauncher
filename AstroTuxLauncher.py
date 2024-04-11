@@ -4,6 +4,7 @@ import os
 from os import path
 import argparse
 import json
+import platform
 import tomli, tomli_w
 import dataclasses
 from dataclasses import dataclass, field
@@ -315,6 +316,10 @@ class AstroTuxLauncher():
         
         cmd = [self.wineexec, "wineboot"]
         env = os.environ.copy()
+
+        # Usually arm64 systems have a proxy .sh script for wine
+        if platform.machine() == "aarch64":
+            cmd = ["sh"] + cmd
         
         # Remove DISPLAY environment variable to stop wine from creating a window
         if "DISPLAY" in env:

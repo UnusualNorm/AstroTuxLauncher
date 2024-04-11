@@ -1,5 +1,6 @@
 import dataclasses
 from dataclasses import dataclass, field
+import platform
 from dataclasses_json import dataclass_json, config, global_config
 import uuid
 from astro.inimulticonfig import INIMultiConfig
@@ -885,6 +886,10 @@ class AstroDedicatedServer:
         cmd = [self.wine_exec, path.join(self.astro_path, "AstroServer.exe"), "-log"]
         env = os.environ.copy()
         env["WINEPREFIX"] = self.wine_pfx
+
+        # Usually, arm64 systems have a proxy .sh script for wine
+        if platform.machine() == "aarch64":
+            cmd = ["sh"] + cmd
         
         LOGGER.debug(f"Executing command '{' '.join(cmd)}' in WINE prefix '{self.wine_pfx}'...")
         
@@ -905,6 +910,10 @@ class AstroDedicatedServer:
         cmd = [self.wineserver_exec, "-k", "-w"]
         env = os.environ.copy()
         env["WINEPREFIX"] = self.wine_pfx
+
+        # Usually, arm64 systems have a proxy .sh script for wine
+        if platform.machine() == "aarch64":
+            cmd = ["sh"] + cmd
         
         LOGGER.debug(f"Executing command '{' '.join(cmd)}' in WINE prefix '{self.wine_pfx}'...")
         
