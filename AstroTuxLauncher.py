@@ -317,9 +317,8 @@ class AstroTuxLauncher():
         cmd = [self.wineexec, "wineboot"]
         env = os.environ.copy()
 
-        # Usually arm64 systems have a proxy .sh script for wine
-        if platform.machine() == "aarch64":
-            cmd = ["sh"] + cmd
+        if platform.machine() != "x86_64":
+            cmd = ["box86"] + cmd
         
         # Remove DISPLAY environment variable to stop wine from creating a window
         if "DISPLAY" in env:

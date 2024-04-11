@@ -887,9 +887,8 @@ class AstroDedicatedServer:
         env = os.environ.copy()
         env["WINEPREFIX"] = self.wine_pfx
 
-        # Usually, arm64 systems have a proxy .sh script for wine
-        if platform.machine() == "aarch64":
-            cmd = ["sh"] + cmd
+        if platform.machine() != "x86_64":
+            cmd = ["box86"] + cmd
         
         LOGGER.debug(f"Executing command '{' '.join(cmd)}' in WINE prefix '{self.wine_pfx}'...")
         
@@ -911,9 +910,8 @@ class AstroDedicatedServer:
         env = os.environ.copy()
         env["WINEPREFIX"] = self.wine_pfx
 
-        # Usually, arm64 systems have a proxy .sh script for wine
-        if platform.machine() == "aarch64":
-            cmd = ["sh"] + cmd
+        if platform.machine() != "x86_64":
+            cmd = ["box86"] + cmd
         
         LOGGER.debug(f"Executing command '{' '.join(cmd)}' in WINE prefix '{self.wine_pfx}'...")
         

@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile.amd64
     # image: ghcr.io/joejoetv/astrotuxlauncher:master
     command: ["start"]
+    tty: true
+    stdin_open: true
     ports:
       - "7777:7777/udp"
     volumes:
