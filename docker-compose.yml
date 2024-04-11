@@ -4,6 +4,12 @@ services:
       context: .
       dockerfile: Dockerfile.amd64
     # image: ghcr.io/joejoetv/astrotuxlauncher:master
+    command: ["start"]
+    ports:
+      - "7777:7777/udp"
     volumes:
       - ./AstroneerServer:/app/AstroneerServer
       - ./.wine:/root/.wine
+      - type: bind
+        source: ./launcher.toml
+        target: /app/launcher.toml
